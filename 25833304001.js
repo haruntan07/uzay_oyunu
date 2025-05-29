@@ -145,7 +145,7 @@ function updateInfo() {
 }
 
 // Meteor oluştur
-const meteorModels = ['meteor-1.glb'];
+const meteorModels = ['meteor-2.glb', 'meteor-3.glb'];
 const gltfLoader = new THREE.GLTFLoader();
 
 function spawnWave() {
