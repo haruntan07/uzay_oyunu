@@ -161,21 +161,30 @@ function spawnWave() {
     for (let col = 0; col < 5; col++) {
       const modelPath = meteorModels[Math.floor(Math.random() * meteorModels.length)];
 
-      gltfLoader.load(modelPath, (gltf) => {
-        const meteor = gltf.scene;
-        meteor.scale.set(0.1, 0.1, 0.1);
-        meteor.position.set(
-          xPositions[col] + (Math.random() - 0.5) * 2,
-          (Math.random() - 0.5) * 4,
-          zPositions[row] + (Math.random() - 0.5) * 10
-        );
-        meteor.userData = {
-          velocityX: (Math.random() > 0.5 ? 0.008 : -0.008) * (1 + level * 0.05),
-          velocityZ: 0.0035 * (1 + level * 0.05)
-        };
-        scene.add(meteor);
-        meteors.push(meteor);
-      });
+gltfLoader.load(modelPath, (gltf) => {
+  const meteor = gltf.scene;
+
+  // BÜTÜN alt objelere (mesh, group vs.) ayrı ayrı ölçek uygula
+  meteor.traverse((child) => {
+    if (child.isMesh) {
+      child.scale.set(0.1, 0.1, 0.1);
+    }
+  });
+
+  meteor.position.set(
+    xPositions[col] + (Math.random() - 0.5) * 2,
+    (Math.random() - 0.5) * 4,
+    zPositions[row] + (Math.random() - 0.5) * 10
+  );
+
+  meteor.userData = {
+    velocityX: (Math.random() > 0.5 ? 0.008 : -0.008) * (1 + level * 0.05),
+    velocityZ: 0.0035 * (1 + level * 0.05)
+  };
+
+  scene.add(meteor);
+  meteors.push(meteor);
+});
     }
   }
 
