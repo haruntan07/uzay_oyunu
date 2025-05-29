@@ -145,7 +145,7 @@ function updateInfo() {
 }
 
 // Meteor oluştur
-const meteorModels = ['meteor-2.glb', 'meteor-3.glb'];
+const meteorModels = ['meteor-1.glb', 'meteor-2.glb', 'meteor-3.glb'];
 const gltfLoader = new THREE.GLTFLoader();
 
 function spawnWave() {
@@ -169,7 +169,7 @@ gltfLoader.load(modelPath, (gltf) => {
   meteor.add(meteorModel);
 
   // Bu grubu küçült
-  meteor.scale.set(0.001, 0.001, 0.001);
+  meteor.scale.set(0.005, 0.005, 0.005);
 
   // Pozisyonu belirle
   meteor.position.set(
