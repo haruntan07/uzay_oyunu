@@ -163,7 +163,7 @@ function spawnWave() {
 
       gltfLoader.load(modelPath, (gltf) => {
         const meteor = gltf.scene;
-        meteor.scale.set(1.2, 1.2, 1.2);
+        meteor.scale.set(0.1, 0.1, 0.1);
         meteor.position.set(
           xPositions[col] + (Math.random() - 0.5) * 2,
           (Math.random() - 0.5) * 4,
