@@ -164,14 +164,14 @@ function spawnWave() {
 gltfLoader.load(modelPath, (gltf) => {
   const meteorModel = gltf.scene;
 
-  // Tüm meteor modelini kapsayan bir grup oluştur
+
   const meteor = new THREE.Group();
   meteor.add(meteorModel);
 
-  // Bu grubu küçült
-  meteor.scale.set(0.05, 0.05, 0.05);
 
-  // Pozisyonu belirle
+  meteor.scale.set(0.1, 0.1, 0.1);
+
+
   meteor.position.set(
     xPositions[col] + (Math.random() - 0.5) * 2,
     (Math.random() - 0.5) * 4,
