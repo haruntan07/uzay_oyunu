@@ -145,31 +145,37 @@ function updateInfo() {
 }
 
 // Meteor oluştur
-const meteorGeometry = new THREE.DodecahedronGeometry(1.0, 0);
-const meteorMaterial = new THREE.MeshStandardMaterial({ color: 0x888888, roughness: 0.9, metalness: 0.2 });
+const meteorModels = ['meteor-1.glb', 'meteor-2.glb', 'meteor-3.glb'];
+const gltfLoader = new THREE.GLTFLoader();
 
 function spawnWave() {
   if (gameOver) return;
+
   meteors.forEach(m => scene.remove(m));
   meteors.length = 0;
+
   const xPositions = [-6, -3, 0, 3, 6];
   const zPositions = [-60, -50, -40, -30];
 
   for (let row = 0; row < 4; row++) {
     for (let col = 0; col < 5; col++) {
-      const meteor = new THREE.Mesh(meteorGeometry, meteorMaterial);
-      meteor.scale.setScalar(meteorScale);
-      meteor.position.set(
-        xPositions[col] + (Math.random() - 0.5) * 2,
-        (Math.random() - 0.5) * 4,
-        zPositions[row] + (Math.random() - 0.5) * 10
-      );
-      meteor.userData = {
-        velocityX: (Math.random() > 0.5 ? 0.008 : -0.008) * (1 + level * 0.05),
-        velocityZ: 0.0035 * (1 + level * 0.05)
-      };
-      scene.add(meteor);
-      meteors.push(meteor);
+      const modelPath = meteorModels[Math.floor(Math.random() * meteorModels.length)];
+
+      gltfLoader.load(modelPath, (gltf) => {
+        const meteor = gltf.scene;
+        meteor.scale.set(1.2, 1.2, 1.2);
+        meteor.position.set(
+          xPositions[col] + (Math.random() - 0.5) * 2,
+          (Math.random() - 0.5) * 4,
+          zPositions[row] + (Math.random() - 0.5) * 10
+        );
+        meteor.userData = {
+          velocityX: (Math.random() > 0.5 ? 0.008 : -0.008) * (1 + level * 0.05),
+          velocityZ: 0.0035 * (1 + level * 0.05)
+        };
+        scene.add(meteor);
+        meteors.push(meteor);
+      });
     }
   }
 
@@ -200,9 +206,7 @@ function createExplosion(position) {
   }
 }
 
-// Mermi
-const bulletGeometry = new THREE.SphereGeometry(0.1, 16, 16);
-const bulletMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+
 
 // Game Over
 function showGameOver() {
@@ -285,14 +289,19 @@ function animate() {
   handleLightControl();
   handleLightMovement();
 
-  if (keys['Space'] && Date.now() - lastShotTime > shootCooldown) {
-    const bullet = new THREE.Mesh(bulletGeometry, bulletMaterial);
-    bullet.position.copy(ship.position);
+if (keys['Space'] && Date.now() - lastShotTime > shootCooldown && ship) {
+  gltfLoader.load('fire.glb', (gltf) => {
+    const bullet = gltf.scene;
+    bullet.scale.set(0.5, 0.5, 0.5);
+    bullet.position.set(ship.position.x, ship.position.y, ship.position.z + 1.8);
     bullet.userData = { velocity: -0.5 * (1 + level * 0.05) };
     scene.add(bullet);
     bullets.push(bullet);
-    lastShotTime = Date.now();
-  }
+  });
+
+  lastShotTime = Date.now();
+}
+
 
   meteors.forEach((meteor, mi) => {
     meteor.position.x += meteor.userData.velocityX;
