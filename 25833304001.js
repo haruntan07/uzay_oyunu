@@ -63,19 +63,24 @@ function handleLightControl() {
   if (keys['KeyD']) light.position.x += moveSpeed;
 }
 
-// Gemi
-const shipGeometry = new THREE.ConeGeometry(0.5, 2, 32);
-const shipMaterial = new THREE.MeshStandardMaterial({
-  color: 0x00ff00,
-  metalness: 0.8,
-  roughness: 0.3,
-  emissive: 0x005500,
-  emissiveIntensity: 0.5
-});
-const ship = new THREE.Mesh(shipGeometry, shipMaterial);
-ship.rotation.x = Math.PI;
-ship.position.set(0, 0, 0);
-scene.add(ship);
+let ship; 
+
+const loader = new THREE.GLTFLoader();
+loader.load(
+  'ship.glb', // model dosyanızın adı
+  function (gltf) {
+    ship = gltf.scene;
+    ship.scale.set(1.5, 1.5, 1.5); // boyut ayarı
+    ship.position.set(0, 0, 0); // sahnedeki konumu
+    scene.add(ship);
+  },
+  undefined,
+  function (error) {
+    console.error('Gemiyi yüklerken hata oluştu:', error);
+  }
+);
+
+
 
 // Yıldızlar
 const starGeometry = new THREE.BufferGeometry();
