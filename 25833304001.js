@@ -70,7 +70,7 @@ loader.load(
   'ship.glb', // model dosyanızın adı
   function (gltf) {
     ship = gltf.scene;
-    ship.scale.set(1.5, 1.5, 1.5); // boyut ayarı
+    ship.scale.set(0.5, 0.5, 0.5); // boyut ayarı
     ship.position.set(0, 0, 0); // sahnedeki konumu
     scene.add(ship);
   },
