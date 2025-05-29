@@ -162,21 +162,23 @@ function spawnWave() {
       const modelPath = meteorModels[Math.floor(Math.random() * meteorModels.length)];
 
 gltfLoader.load(modelPath, (gltf) => {
-  const meteor = gltf.scene;
+  const meteorModel = gltf.scene;
 
-  // BÜTÜN alt objelere (mesh, group vs.) ayrı ayrı ölçek uygula
-  meteor.traverse((child) => {
-    if (child.isMesh) {
-      child.scale.set(0.1, 0.1, 0.1);
-    }
-  });
+  // Tüm meteor modelini kapsayan bir grup oluştur
+  const meteor = new THREE.Group();
+  meteor.add(meteorModel);
 
+  // Bu grubu küçült
+  meteor.scale.set(0.1, 0.1, 0.1);  // 10'da 1
+
+  // Pozisyonu belirle
   meteor.position.set(
     xPositions[col] + (Math.random() - 0.5) * 2,
     (Math.random() - 0.5) * 4,
     zPositions[row] + (Math.random() - 0.5) * 10
   );
 
+  // Hız bilgisi
   meteor.userData = {
     velocityX: (Math.random() > 0.5 ? 0.008 : -0.008) * (1 + level * 0.05),
     velocityZ: 0.0035 * (1 + level * 0.05)
@@ -185,6 +187,7 @@ gltfLoader.load(modelPath, (gltf) => {
   scene.add(meteor);
   meteors.push(meteor);
 });
+
     }
   }
 
