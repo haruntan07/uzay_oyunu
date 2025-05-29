@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Uzay Savaşı</title>
+  <style>
+    body { margin: 0; overflow: hidden; background-color: #000; }
+    canvas { display: block; }
+
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: #0f0;
+      font-family: 'Arial', sans-serif;
+      font-size: 12px;
+      background: rgba(0,0,0,0.7);
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #0f0;
+      width: 260px;
+    }
+
+    #infoPanel {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #0f0;
+      font-family: 'Arial', sans-serif;
+      font-size: 14px;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #0f0;
+      text-align: right;
+    }
+
+    #gameOver {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.9);
+      padding: 30px;
+      color: #0f0;
+      text-align: center;
+      display: none;
+      font-family: 'Arial', sans-serif;
+      border-radius: 10px;
+      width: 350px;
+      border: 2px solid #0f0;
+    }
+
+    #gameOver h2 {
+      margin-top: 0;
+      color: #f00;
+    }
+
+    #gameOver button {
+      margin: 10px;
+      padding: 12px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #222;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    #gameOver button:hover {
+      background: #0f0;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <p>
+      ←↑↓→: Hareket<br>
+      SPACE: Ateş<br>
+      FARE: Kamera<br>
+      TEKERLEK: Zoom<br>
+      L: Işık Aç/Kapa <br>
+	  +/-: Işık Parlaklık<br>
+	  WASD: Işık Hareket<br>
+      ESC: Oyundan Çık
+    </p>
+  </div>
+
+  <div id="infoPanel">
+    <p>SEVİYE: <span id="level">1</span></p>
+    <p>DALGA: <span id="wave">1</span></p>
+    <p>KALAN METEOR: <span id="meteors">20</span></p>
+    <p>SÜRE: <span id="countdown">20</span> sn</p>
+  </div>
+
+  <div id="gameOver">
+    <h2>OYUN BİTTİ!</h2>
+    <p id="finalScore">Yok Edilen Meteor: <span>0</span></p>
+    <button id="restart">YENİDEN BAŞLA</button>
+    <button id="exit">ÇIKIŞ</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="25833304001.js"></script>
+</body>
+</html>
