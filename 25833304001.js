@@ -169,7 +169,7 @@ gltfLoader.load(modelPath, (gltf) => {
   meteor.add(meteorModel);
 
 
-  meteor.scale.set(0.1, 0.1, 0.1);
+  meteor.scale.set(1, 1, 1);
 
 
   meteor.position.set(
