@@ -169,7 +169,7 @@ gltfLoader.load(modelPath, (gltf) => {
   meteor.add(meteorModel);
 
   // Bu grubu küçült
-  meteor.scale.set(0.005, 0.005, 0.005);
+  meteor.scale.set(0.05, 0.05, 0.05);
 
   // Pozisyonu belirle
   meteor.position.set(
