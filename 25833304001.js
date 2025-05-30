@@ -99,7 +99,7 @@ const bullets = [];
 const particles = [];
 let level = 1;
 let wave = 1;
-let countdown = 20;
+let countdown = 30;
 let countdownInterval;
 let meteorsLeftInWave = 20;
 let totalMeteorsDestroyed = 0;
