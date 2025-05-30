@@ -27,7 +27,7 @@ document.addEventListener('keyup', (e) => {
   keys[e.code] = false;
 });
 
-// Işık kontrolü + yıldızlar
+// Işık kontrolü
 function handleLightControl() {
 
   if (keys['KeyL']) {
@@ -67,11 +67,11 @@ let ship;
 
 const loader = new THREE.GLTFLoader();
 loader.load(
-  'ship.glb', // model dosyanızın adı
+  'ship.glb',
   function (gltf) {
     ship = gltf.scene;
-    ship.scale.set(0.5, 0.5, 0.5); // boyut ayarı
-    ship.position.set(0, 0, 0); // sahnedeki konumu
+    ship.scale.set(0.5, 0.5, 0.5);
+    ship.position.set(0, 0, 0);
     scene.add(ship);
   },
   undefined,
@@ -145,7 +145,7 @@ function updateInfo() {
 }
 
 // Meteor oluştur
-const meteorModels = ['meteor-4.glb'];
+const meteorModels = ['meteor-5.glb'];
 const gltfLoader = new THREE.GLTFLoader();
 
 function spawnWave() {
@@ -292,7 +292,7 @@ function updateCameraPosition() {
   camera.lookAt(ship.position);
 }
 
-// Ana döngü
+
 function animate() {
   requestAnimationFrame(animate);
   if (gameOver) return;
