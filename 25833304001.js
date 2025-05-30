@@ -192,7 +192,7 @@ gltfLoader.load(modelPath, (gltf) => {
   }
 
   meteorsLeftInWave = 20;
-  countdown = Math.max(5, 20 - (wave - 1) * 2);
+  countdown = Math.max(5, 30 - (wave - 1) * 2);
   updateInfo();
   startCountdown();
 }
