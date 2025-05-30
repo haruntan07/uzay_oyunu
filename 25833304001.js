@@ -242,7 +242,7 @@ document.getElementById('restart').addEventListener('click', () => {
   meteorScale = 1.0;
   totalMeteorsDestroyed = 0;
   meteorsLeftInWave = 20;
-  countdown = 20;
+  countdown = 30;
   ship.position.set(0, 0, 0);
   lastShotTime = 0;
   document.getElementById('gameOver').style.display = 'none';
@@ -347,8 +347,8 @@ if (keys['Space'] && Date.now() - lastShotTime > shootCooldown && ship) {
         updateInfo();
 
         if (meteorsLeftInWave === 0) {
-          if (level === 5 && wave === 5) return alert('Tebrikler, oyunu kazandınız!');
-          if (wave < 5) wave++;
+          if (level === 2 && wave === 2) return alert('Tebrikler, oyunu kazandınız!');
+          if (wave < 2) wave++;
           else { level++; wave = 1; meteorScale *= 0.9; }
           spawnWave();
         }
